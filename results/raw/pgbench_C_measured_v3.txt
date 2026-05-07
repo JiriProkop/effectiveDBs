@@ -1,0 +1,13 @@
+pgbench (18.3 (Debian 18.3-1.pgdg13+1))
+transaction type: /workspace/query_C.sql
+scaling factor: 1
+query mode: simple
+number of clients: 1
+number of threads: 1
+maximum number of tries: 1
+number of transactions per client: 50
+number of transactions actually processed: 50/50
+number of failed transactions: 0 (0.000%)
+latency average = 51.857 ms
+initial connection time = 2.104 ms
+tps = 19.283740 (without initial connection time)

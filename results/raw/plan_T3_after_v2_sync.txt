@@ -1,0 +1,12 @@
+                                                   QUERY PLAN                                                   
+----------------------------------------------------------------------------------------------------------------
+ Seq Scan on orders  (cost=0.00..2129.00 rows=20017 width=24) (actual time=0.021..17.716 rows=20082.00 loops=1)
+   Filter: ((status)::text = 'Shipped'::text)
+   Rows Removed by Filter: 79918
+   Buffers: shared hit=879
+ Planning:
+   Buffers: shared hit=95 read=1
+ Planning Time: 0.530 ms
+ Execution Time: 18.899 ms
+(8 rows)
+

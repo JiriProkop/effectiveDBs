@@ -1,0 +1,5 @@
+BASE 20.225
+idx_w1 latency=12.894 improvement=36.25%
+idx_w2 latency=12.998 improvement=35.73%
+idx_w3 latency=14.793 improvement=26.86%
+idx_w4 latency=17.879 improvement=11.60%

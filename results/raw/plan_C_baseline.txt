@@ -1,0 +1,39 @@
+                                                                               QUERY PLAN                                                                               
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ Limit  (cost=9888.36..9888.39 rows=10 width=230) (actual time=3.523..5.343 rows=0.00 loops=1)
+   Buffers: shared hit=22
+   ->  Sort  (cost=9888.36..9888.86 rows=200 width=230) (actual time=3.522..5.341 rows=0.00 loops=1)
+         Sort Key: (sum(oi.quantity)) DESC
+         Sort Method: quicksort  Memory: 25kB
+         Buffers: shared hit=22
+         ->  Finalize GroupAggregate  (cost=9840.74..9884.04 rows=200 width=230) (actual time=3.508..5.328 rows=0.00 loops=1)
+               Group Key: p.product_id, p.name
+               Buffers: shared hit=19
+               ->  Gather Merge  (cost=9840.74..9879.49 rows=340 width=230) (actual time=3.508..5.326 rows=0.00 loops=1)
+                     Workers Planned: 1
+                     Workers Launched: 1
+                     Buffers: shared hit=19
+                     ->  Sort  (cost=8840.73..8841.23 rows=200 width=230) (actual time=0.047..0.048 rows=0.00 loops=2)
+                           Sort Key: p.product_id, p.name
+                           Sort Method: quicksort  Memory: 25kB
+                           Buffers: shared hit=19
+                           Worker 0:  Sort Method: quicksort  Memory: 25kB
+                           ->  Partial HashAggregate  (cost=8831.08..8833.08 rows=200 width=230) (actual time=0.028..0.029 rows=0.00 loops=2)
+                                 Group Key: p.product_id, p.name
+                                 Batches: 1  Memory Usage: 40kB
+                                 Buffers: shared hit=4
+                                 Worker 0:  Batches: 1  Memory Usage: 40kB
+                                 ->  Hash Join  (cost=16.07..8307.64 rows=69793 width=226) (actual time=0.026..0.027 rows=0.00 loops=2)
+                                       Hash Cond: (oi.product_id = p.product_id)
+                                       Buffers: shared hit=4
+                                       ->  Parallel Seq Scan on ordered_items oi  (cost=0.00..2908.46 rows=129246 width=8) (actual time=0.008..0.008 rows=1.00 loops=2)
+                                             Buffers: shared hit=4
+                                       ->  Hash  (cost=12.70..12.70 rows=270 width=222) (actual time=0.007..0.007 rows=0.00 loops=2)
+                                             Buckets: 1024  Batches: 1  Memory Usage: 8kB
+                                             ->  Seq Scan on products p  (cost=0.00..12.70 rows=270 width=222) (actual time=0.007..0.007 rows=0.00 loops=2)
+ Planning:
+   Buffers: shared hit=92 read=2
+ Planning Time: 0.574 ms
+ Execution Time: 5.452 ms
+(35 rows)
+

@@ -1,0 +1,16 @@
+                                                                 QUERY PLAN                                                                 
+--------------------------------------------------------------------------------------------------------------------------------------------
+ Bitmap Heap Scan on orders  (cost=202.52..1197.47 rows=17836 width=24) (actual time=0.720..5.987 rows=17612.00 loops=1)
+   Recheck Cond: ((status)::text = 'Shipped'::text)
+   Heap Blocks: exact=772
+   Buffers: shared hit=774 read=14
+   ->  Bitmap Index Scan on idx_orders_status_weak  (cost=0.00..198.06 rows=17836 width=0) (actual time=0.604..0.605 rows=17612.00 loops=1)
+         Index Cond: ((status)::text = 'Shipped'::text)
+         Index Searches: 1
+         Buffers: shared hit=2 read=14
+ Planning:
+   Buffers: shared hit=76
+ Planning Time: 0.365 ms
+ Execution Time: 6.530 ms
+(12 rows)
+

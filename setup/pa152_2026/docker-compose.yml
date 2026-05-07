@@ -1,0 +1,15 @@
+services:
+  postgres:
+    image: postgres:18
+    container_name: pa152
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: pa152_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql
+      - ./:/workspace
+
+volumes:
+  pgdata:

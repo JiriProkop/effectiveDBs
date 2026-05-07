@@ -1,0 +1,17 @@
+                                                              QUERY PLAN                                                               
+---------------------------------------------------------------------------------------------------------------------------------------
+ Seq Scan on orders  (cost=2129.01..4508.01 rows=2197 width=33) (actual time=15.341..22.904 rows=5704.00 loops=1)
+   Filter: ((order_date >= (InitPlan 1).col1) AND ((status)::text = 'Pending'::text))
+   Rows Removed by Filter: 94296
+   Buffers: shared hit=1758
+   InitPlan 1
+     ->  Aggregate  (cost=2129.00..2129.01 rows=1 width=8) (actual time=15.327..15.328 rows=1.00 loops=1)
+           Buffers: shared hit=879
+           ->  Seq Scan on orders orders_1  (cost=0.00..1879.00 rows=100000 width=8) (actual time=0.004..7.788 rows=100000.00 loops=1)
+                 Buffers: shared hit=879
+ Planning:
+   Buffers: shared hit=103
+ Planning Time: 0.325 ms
+ Execution Time: 23.145 ms
+(13 rows)
+
